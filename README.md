@@ -9,6 +9,11 @@ gulp 4 前后端不分离模板(切图仔的最爱)
 6. es6 写配置文件
 
 ## TODO 
-1. 压缩与不压缩; 检查
-2. 完善demo, 例如: 模板demo
-3. 性能优化
+1. ~~压缩与不压缩; 检查~~
+2. ~~完善demo, 例如: 模板demo~~
+3. 细节, 比如min文件不压缩, lib库(包含img css js)的处理
+4. 性能优化
+
+## 运行
+运行`gulp`, 
+查看页面 http://localhost:3000/page/about.html

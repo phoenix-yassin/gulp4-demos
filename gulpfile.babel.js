@@ -11,6 +11,7 @@ import cleanCSS from 'gulp-clean-css';
 import browserSync, {reload} from 'browser-sync';
 import del from 'del';
 import fileinclude from 'gulp-file-include';
+import imagemin from 'gulp-imagemin';
 
 // gulp.task('jshint', function() {
 //         gulp.src('./js/*.js')
@@ -67,6 +68,8 @@ gulp.task('html', () => {
 });
 gulp.task('img', () => {
     return gulp.src(['./img/**.*'])
+        .pipe(imagemin())
+        .pipe(gulp.dest('dist/images'))
         .pipe(gulp.dest('./dist/img/'))
         .pipe(
             reload({
