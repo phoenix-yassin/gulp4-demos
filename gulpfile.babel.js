@@ -12,6 +12,7 @@ import browserSync, {reload} from 'browser-sync';
 import del from 'del';
 import fileinclude from 'gulp-file-include';
 import imagemin from 'gulp-imagemin';
+import eslint from 'gulp-eslint';
 
 // gulp.task('jshint', function() {
 //         gulp.src('./js/*.js')
@@ -23,6 +24,7 @@ gulp.task('js', cb => {
     return (
         gulp.src(['./js/*.js'])
             // .pipe(uglify())
+            .pipe(eslint())
             .pipe(gulp.dest('./dist/js/'))
             .pipe(
                 reload({
@@ -32,9 +34,8 @@ gulp.task('js', cb => {
     );
 });
 
-gulp.task('less', cb => {
-    // 其余的样式文件都由style.less引入
-    let pipeStream = gulp.src(['./css/**.*', '!./css/*.min.css'])
+const lessStyle = () => {
+    return gulp.src(['./css/*.less', '!./css/_*.less'])
         .pipe(less())
         .pipe(
             autoprefix({
@@ -48,8 +49,38 @@ gulp.task('less', cb => {
                 stream: true
             })
         );
-    return pipeStream;
-});
+};
+const cssStyle = () => {
+    return gulp.src(['./css/*.css'])
+        .pipe(cleanCSS())
+        .pipe(gulp.dest('./dist/css/'))
+        .pipe(
+            reload({
+                stream: true
+            })
+        );
+};
+gulp.task('less',
+    gulp.series(cssStyle, lessStyle)
+);
+// gulp.task('less', cb => {
+//     // 其余的样式文件都由style.less引入
+//     let pipeStream = gulp.src(['./css/**.*'])
+//         .pipe(less())
+//         .pipe(
+//             autoprefix({
+//                 browsers: ['last 2 versions']
+//             })
+//         )
+//         .pipe(cleanCSS())
+//         .pipe(gulp.dest('./dist/css/'))
+//         .pipe(
+//             reload({
+//                 stream: true
+//             })
+//         );
+//     return pipeStream;
+// });
 gulp.task('html', () => {
     return gulp.src(['./page/*.html'])
         .pipe(
@@ -84,16 +115,6 @@ gulp.task('browserSync', cb => {
         }
     });
 });
-
-// gulp.task('fileinclude', function() {
-//     return gulp.src(['./page/*.html'])
-//         .pipe(fileinclude({
-//             prefix: '<!--@',
-//             suffix: '-->',
-//             basepath: './html_template'
-//         }))
-//         .pipe(gulp.dest('./dist/page/'));
-// });
 
 gulp.task('watch', cb => {
     gulp.watch('./js/*.js', gulp.series('js'));
