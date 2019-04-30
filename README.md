@@ -67,6 +67,7 @@ gulp 4 前后端不分离模板(切图仔的最爱)
 3. es6
    
    采用es6编码已经非常流行了, 但是在关于es6 babel的配置却一直变化, 一会儿找不到包`babel-preset-env`, 一会儿又是`babel-core`异常。出现问题， 主要是因为es6转码的babel一直在变化，出现了版本间不兼容的问题。
+   
    `package.json`中相关的包:
    ```javascript
     "gulp-babel": "^8.0.0",
