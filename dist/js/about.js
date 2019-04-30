@@ -1,10 +1,11 @@
+"use strict";
+
 var about = {
-    name :'yumeng',
-    sayname:function(){
-        return this.name
-    }
-}
-let dom = document.createElement('span');
+  name: 'yumeng',
+  sayname: function sayname() {
+    return this.name;
+  }
+};
+var dom = document.createElement('span');
 dom.innerText = 'append dom';
-document.querySelector('body')
-    .appendChild(dom);
+document.querySelector('body').appendChild(dom);

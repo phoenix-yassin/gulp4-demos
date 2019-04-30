@@ -3,16 +3,17 @@
  * @desc: gulp 配置文件
  * @author: yiyh
  */
-
-import gulp from 'gulp';
-import autoprefix from 'gulp-autoprefixer';
-import less from 'gulp-less';
-import cleanCSS from 'gulp-clean-css';
-import browserSync, {reload} from 'browser-sync';
-import del from 'del';
-import fileinclude from 'gulp-file-include';
-import imagemin from 'gulp-imagemin';
-import eslint from 'gulp-eslint';
+const  gulp = require('gulp');
+const autoprefix = require('gulp-autoprefixer');
+const less = require('gulp-less');
+const cleanCSS = require('gulp-clean-css');
+const browserSync = require('browser-sync');
+const reload = browserSync.reload;
+const del = require('del');
+const fileinclude = require('gulp-file-include');
+const imagemin = require('gulp-imagemin');
+const eslint = require('gulp-eslint');
+const babel = require('gulp-babel');
 
 // gulp.task('jshint', function() {
 //         gulp.src('./js/*.js')
@@ -25,6 +26,9 @@ gulp.task('js', cb => {
         gulp.src(['./js/*.js'])
             // .pipe(uglify())
             .pipe(eslint())
+            .pipe(babel({
+                presets: ['@babel/preset-env']
+            }))
             .pipe(gulp.dest('./dist/js/'))
             .pipe(
                 reload({
