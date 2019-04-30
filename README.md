@@ -64,11 +64,45 @@ gulp 4 前后端不分离模板(切图仔的最爱)
     });
     ```
 
+3. es6
+   
+   采用es6编码已经非常流行了, 但是在关于es6 babel的配置却一直变化, 一会儿找不到包`babel-preset-env`, 一会儿又是`babel-core`异常。出现问题， 主要是因为es6转码的babel一直在变化，出现了版本间不兼容的问题。
+   `package.json`中相关的包:
+   ```javascript
+    "gulp-babel": "^8.0.0",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+   ```
+   `.babelrc`中的配置如下:
+   ```javascript
+    {
+        "presets": ["@babel/preset-env"]
+    }
+   ```
+   `gulpfile.babel.js`中应该这样配置:
+   ```javascript
+    gulp.task('js', cb => {
+        return (
+            gulp.src(['./js/*.js'])
+                // .pipe(uglify())
+                .pipe(eslint())
+                .pipe(babel({
+                    presets: ['@babel/preset-env']
+                }))
+                .pipe(gulp.dest('./dist/js/'))
+                .pipe(
+                    reload({
+                        stream: true
+                    })
+                )
+        );
+    });
+   ```
 ## 运行
 命令行运行`gulp`, 输入页面路径 http://localhost:3000/page/about.html
 
+
 ## TODO 
 1. ~~压缩与不压缩; 检查~~
-2. ~~完善demo, 例如: 模板demo~~
-3. 细节, 比如min文件不压缩, lib库(包含img css js)的处理
-4. 性能优化
+2. 细节, 比如min文件不压缩, lib库(包含img css js)的处理
+3. 性能优化
