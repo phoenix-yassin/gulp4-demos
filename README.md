@@ -8,7 +8,7 @@ gulp 4 前后端不分离模板(切图仔的最爱)
 2. html处理: gulp-file-include模板, 对应后端jsp的`include`语法
 3. img压缩
 4. 热启动
-5. js语法检查(因为我是切图仔, 写的js是基本效果, 必须让后端xx看明白)
+5. js语法检查(因为我是切图仔, 写的js是基本效果,不能压缩代码, 以方便后端同事查看源码)
 6. 引入es6
 
 ## 重点分析
@@ -107,3 +107,7 @@ gulp 4 前后端不分离模板(切图仔的最爱)
 1. ~~压缩与不压缩; 检查~~
 2. 细节, 比如min文件不压缩, lib库(包含img css js)的处理
 3. 性能优化
+
+## github地址
+
+[github地址](https://github.com/phoenix-yassin/gulp4-demos)
